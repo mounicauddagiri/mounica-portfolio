@@ -15,7 +15,7 @@ export const About = () =>{
                 </h2>
                 <div className="rounded-xl p-8  border-white/10 border hover:-transalte-y-1 transition-all">
                     <p className="text-gray-300 mb-6">
-                        Passionate developer with expertise in building scalable and responsive web applications.
+                        Passionate developer with expertise in building scalable and responsive web applications. Expertise in both frontend and backend servers.
                     </p>
                 
                     <div className="grid grid-cols-1 text-left md:grid-cols-2 gap-6">
