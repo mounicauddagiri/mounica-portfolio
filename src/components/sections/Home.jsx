@@ -1,41 +1,40 @@
-import { RevealOnScroll } from "../RevealOnScroll"
-import image from "../../../public/mounica.jpg"
-export const Home =() =>{
-    return (
-        <section id="home" className="min-h-screen flex items-center justify-center relative">
-            <RevealOnScroll>
-            <div className="flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-10 z-10 px-4">
-                <div className="flex-shrink-0">
-                    <img
-                        src={image}
-                        alt="Mounica"
-                        className="w-60 h-60 md:w-60 md:h-60 object-cover rounded-full border-2 border-blue-300 shadow-lg"/>
-                </div>
-            
-                <div className="text-center z-10 px-4 ">
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent leading-right">
-                        Hi, I'm Mounica
-                    </h1>
-                    <p className="text-gray-400 text-lg mb-8 max-w-lg mx-auto">
-                    I'm a full-stack developer who loves creating clean, scalable and responsive web applications. 
-                    I aim to provide solutions that offer both exceptional performance and delightful user experience.              
-                    </p>
-                    <div className="flex justify-center space-x-4">
-                        <a href="#projects" className="bg-blue-500 text-white py-3 px-6 rounded font-medium transition relative overflow-hidden 
-                        hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)">
-                            View Projects
-                        </a>
-                        <a
-                        href="#contact"
-                        className="border border-blue-500/50 text-blue-500 py-3 px-6 rounded font-medium transition-all duration-200 
-                        hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59, 130, 246, 0.2)] hover:bg-blue-500/10"
-                        >
-                            Contact Me
-                        </a>
-                    </div>
-                </div>
-            </div>
-            </RevealOnScroll>
-        </section>
-    )
-}
+import { profile } from "../../data/portfolio";
+import { AgentTrace } from "../AgentTrace";
+
+export const Home = () => (
+  <section id="home" className="relative overflow-hidden pt-32 pb-24 md:pt-44 md:pb-36">
+    <div aria-hidden="true" className="grid-bg pointer-events-none absolute inset-0" />
+    <div aria-hidden="true" className="glow pointer-events-none absolute inset-0" />
+    <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 lg:grid-cols-[1.1fr_1fr]">
+      <div>
+        <p className="rise text-lg text-lilac">{profile.greeting}</p>
+        <h1
+          className="rise mt-5 text-balance text-5xl font-extrabold leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-7xl"
+          style={{ animationDelay: "80ms" }}
+        >
+          {profile.headline}
+        </h1>
+        <p className="rise mt-6 max-w-xl text-lg leading-relaxed text-muted" style={{ animationDelay: "160ms" }}>
+          {profile.intro}
+        </p>
+        <div className="rise mt-10 flex flex-wrap gap-3" style={{ animationDelay: "240ms" }}>
+          <a
+            href="#projects"
+            className="rounded-lg bg-accent px-5 py-3 font-medium text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.12),0_10px_30px_-10px_rgb(139_92_246/0.8)] transition hover:bg-violet-500"
+          >
+            See my projects
+          </a>
+          <a
+            href="#contact"
+            className="rounded-lg border border-line px-5 py-3 font-medium text-fg transition hover:border-lilac/50 hover:bg-panel"
+          >
+            Get in touch
+          </a>
+        </div>
+      </div>
+      <div className="rise" style={{ animationDelay: "320ms" }}>
+        <AgentTrace />
+      </div>
+    </div>
+  </section>
+);

@@ -1,88 +1,80 @@
-import { RevealOnScroll } from "../RevealOnScroll"
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
 import { useState } from "react";
-import image from "../../../public/mounica2.jpg";
 
-export const Contact = () =>{
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: "",
-      });
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        emailjs.sendForm(
-            import.meta.env.VITE_SERVICE_ID, 
-            import.meta.env.VITE_TEMPLATE_ID, 
-            e.target, 
-            import.meta.env.VITE_PUBLIC_kEY)
-        .then(()=>{
-            alert("Message sent!");
-            setFormData({name: "", email:"", message:""});
-        }).catch(()=> alert("OOps! something went wrong. Please try again."));
-    };
-    return (
-        <section id="contact" className="min-h-screen flex items-center justify-center py-20">
-            <RevealOnScroll>
-                <div className="flex flex-col md:flex-row items-center  justify-center text-center md:text-left gap-10 z-10 px-4">
-                    <div className="flex-shrink-0">
-                        <img
-                            src={image}
-                            alt="m2"
-                            className="w-80 h-100 md:w-80 md:h-100 object-cover max-w-full rounded-md border-2 border-blue-300 shadow-lg"/>
-                    </div>
-                    <div className="px-4 w-full min-w-[300px] md:w-[500px] sm:w-2/3 p-6">
-                        <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
-                            Get In Touch
-                        </h2>
-                        <form className="space-y-6" onSubmit={handleSubmit}>
-                            <div className="relative">
-                                <input 
-                                    type="text" 
-                                    id="name" 
-                                    name="name" 
-                                    required 
-                                    value={formData.name}
-                                    className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white transition focus:outline-none focus:border-blue-500 focus:bg-blue-500/5"
-                                    placeholder="Name"
-                                    onChange={(e)=> setFormData({...formData, name: e.target.value})}/>
+const fieldClass =
+  "w-full rounded-lg border border-line bg-panel/70 px-4 py-3 text-fg placeholder:text-muted/60 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30";
 
-                            </div>
-                            <div className="relative">
-                                <input 
-                                    type="email" 
-                                    id="email" 
-                                    name="email" 
-                                    required 
-                                    value={formData.email}
-                                    className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white transition focus:outline-none focus:border-blue-500 focus:bg-blue-500/5"
-                                    placeholder="example@gmai.com"
-                                    onChange={(e)=> setFormData({...formData, email: e.target.value})}/>
+export const Contact = () => {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
 
-                            </div>
-                            <div className="relative">
-                                <textarea 
-                                    id="message" 
-                                    name="message" 
-                                    required 
-                                    rows={5}
-                                    value={formData.message}
-                                    className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white transition focus:outline-none focus:border-blue-500 focus:bg-blue-500/5"
-                                    placeholder="Your message"
-                                    onChange={(e)=> setFormData({...formData, message: e.target.value})}/>
+  const update = (field) => (e) => setFormData({ ...formData, [field]: e.target.value });
 
-                            </div>
-                            <button
-                                type="submit"
-                                className="w-full bg-blue-500 text-white py-3 px-6 rounded font-medium transition relative overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]"
-                                >
-                                Send Message
-                            </button>
-                        </form>
-                    
-                    </div>
-                </div>
-            </RevealOnScroll>
-        </section>
-    )
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus("sending");
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        e.target,
+        import.meta.env.VITE_PUBLIC_kEY
+      )
+      .then(() => {
+        setStatus("sent");
+        setFormData({ name: "", email: "", message: "" });
+      })
+      .catch(() => setStatus("error"));
+  };
+
+  return (
+    <section id="contact" className="relative overflow-hidden border-t border-line py-24 md:py-32">
+      <div aria-hidden="true" className="glow pointer-events-none absolute inset-0 opacity-60" />
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2">
+        <div>
+          <h2 className="text-4xl font-bold tracking-[-0.03em] md:text-5xl">Let's work together</h2>
+          <p className="mt-4 max-w-md text-lg leading-relaxed text-muted">
+            Have a role, a project or an AI idea in mind? Send a message and I'll reply by email.
+          </p>
+        </div>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="block">
+              <span className="mb-1.5 block text-sm text-muted">Name</span>
+              <input type="text" name="name" required value={formData.name} onChange={update("name")} className={fieldClass} />
+            </label>
+            <label className="block">
+              <span className="mb-1.5 block text-sm text-muted">Email</span>
+              <input
+                type="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={update("email")}
+                placeholder="you@example.com"
+                className={fieldClass}
+              />
+            </label>
+          </div>
+          <label className="block">
+            <span className="mb-1.5 block text-sm text-muted">Message</span>
+            <textarea name="message" required rows={5} value={formData.message} onChange={update("message")} className={fieldClass} />
+          </label>
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="w-full rounded-lg bg-accent px-5 py-3 font-medium text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.12),0_10px_30px_-10px_rgb(139_92_246/0.8)] transition hover:bg-violet-500 disabled:opacity-60"
+          >
+            {status === "sending" ? "Sending…" : "Send message"}
+          </button>
+          <p role="status" aria-live="polite" className="min-h-5 text-sm">
+            {status === "sent" && <span className="text-emerald-400">Message sent. I'll reply by email soon.</span>}
+            {status === "error" && (
+              <span className="text-red-400">Your message didn't send. Check your connection and try again.</span>
+            )}
+          </p>
+        </form>
+      </div>
+    </section>
+  );
+};

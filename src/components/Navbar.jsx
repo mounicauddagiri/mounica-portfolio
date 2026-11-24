@@ -1,51 +1,50 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
+import { navLinks } from "./navLinks";
+import { profile } from "../data/portfolio";
 
-export const Navbar = ({menuOpen, setMenuOpen})=>{
+const initials = profile.fullName
+  .split(" ")
+  .map((part) => part[0])
+  .join("");
 
-    useEffect(()=>{
-        document.body.style.overflow = menuOpen ? "hidden" : "";
-    }, [menuOpen]);
+export const Navbar = ({ menuOpen, setMenuOpen }) => {
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+  }, [menuOpen]);
 
-    return (
-    <nav className="fixed top-0 w-full z-40 bg-[rgba(10, 10, 10, 0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
-        <div className="max-w-7xl  mx-auto px-4">
-            <div className="flex justify-between items-center h-16">
-                <a href="#home" className="font-mono text-xl font-bold text-white">
-                    {" "}
-                    Mounica <span className="text-blue-500">Uddagiri</span>
-                </a>
-                <div className="w-7 h-5 relative cursor-pointer z-40 md:hidden" // might need to change here
-                    onClick={()=> setMenuOpen((prev) => !prev)}>
-                    &#9776;
-                </div>
-                <div className="hidden md:flex item-center space-x-8">
-                    <a 
-                    href="#home" 
-                    className="text-gray-300 hover:text-white transition-colors"> 
-                        {" "}
-                        Home{" "}
-                    </a>
-                    <a 
-                    href="#about" 
-                    className="text-gray-300 hover:text-white transition-colors"> 
-                        {" "}
-                        About{" "}
-                    </a>
-                    <a 
-                    href="#projects" 
-                    className="text-gray-300 hover:text-white transition-colors"> 
-                        {" "}
-                        Projects{" "}
-                    </a>
-                    <a 
-                    href="#contact" 
-                    className="text-gray-300 hover:text-white transition-colors"> 
-                        {" "}
-                        Contact{" "}
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    )
-}
+  return (
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-line/70 bg-ink/70 backdrop-blur-xl">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <a href="#home" className="flex items-center gap-2.5 font-semibold tracking-tight">
+          <span
+            aria-hidden="true"
+            className="grid h-7 w-7 place-items-center rounded-md bg-accent text-xs font-bold text-white"
+          >
+            {initials}
+          </span>
+          {profile.fullName}
+        </a>
+        <ul className="hidden items-center gap-8 text-sm text-muted md:flex">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <a href={link.href} className="transition-colors hover:text-fg">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <button
+          type="button"
+          className="-mr-2 p-2 text-muted hover:text-fg md:hidden"
+          aria-label="Open menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(true)}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </nav>
+    </header>
+  );
+};

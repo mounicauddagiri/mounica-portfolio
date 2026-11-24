@@ -1,35 +1,32 @@
 import { useState } from 'react';
-import { LoadingScreen } from './components/LoadingScreen'
 import { Navbar } from './components/Navbar';
-import { MobileMenu} from './components/MobileMenu';
+import { MobileMenu } from './components/MobileMenu';
+import { Footer } from './components/Footer';
 import { Home } from './components/sections/Home';
-import { About } from './components/sections/About';
+import { AI } from './components/sections/AI';
 import { Projects } from './components/sections/Projects';
+import { Experience } from './components/sections/Experience';
+import { About } from './components/sections/About';
 import { Contact } from './components/sections/Contact';
-import './App.css'
-import './index.css'
+
 function App() {
- 
-  const [isLoaded, setIsLoaded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <>
-      {!isLoaded && <LoadingScreen onComplete={() => setIsLoaded(true)} />}{" "}
-      <div
-        className={`min-h-screen transition-opacity duration-700 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        } bg-black text-gray-100`}
-      >
-        <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-        <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+    <div className="min-h-screen bg-ink text-fg">
+      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <main>
         <Home />
-        <About />
+        <AI />
         <Projects />
-        <Contact/>
-      </div>
-    </>
-  )
+        <Experience />
+        <About />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;
