@@ -1,13 +1,7 @@
 import image from "../../../public/mounica.jpg";
-import { profile, skills, education } from "../../data/portfolio";
-
-const skillGroups = [
-  { label: "AI", items: skills.ai },
-  { label: "Frontend", items: skills.frontend },
-  { label: "Backend", items: skills.backend },
-  { label: "Database", items: skills.database },
-  { label: "Cloud", items: skills.cloud },
-];
+import { profile, education } from "../../data/portfolio";
+import { skillGroups } from "../../lib/skillGroups";
+import { slug } from "../../lib/slug";
 
 export const About = () => (
   <section id="about" className="border-t border-line py-24 md:py-32">
@@ -22,13 +16,13 @@ export const About = () => (
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{profile.about}</p>
         <dl className="mt-12 divide-y divide-line border-y border-line">
           {skillGroups.map((group) => (
-            <div key={group.label} className="grid gap-2 py-5 sm:grid-cols-[140px_1fr]">
+            <div key={group.key} id={`skills-${group.key}`} className="-mx-3 grid gap-2 rounded-lg px-3 py-5 sm:grid-cols-[140px_1fr]">
               <dt className="font-medium">{group.label}</dt>
               <dd className="text-muted">{group.items.join(", ")}</dd>
             </div>
           ))}
           {education.map((edu) => (
-            <div key={edu.degree} className="grid gap-2 py-5 sm:grid-cols-[140px_1fr]">
+            <div key={edu.degree} id={`education-${slug(edu.degree)}`} className="-mx-3 grid gap-2 rounded-lg px-3 py-5 sm:grid-cols-[140px_1fr]">
               <dt className="font-medium">Education</dt>
               <dd>
                 <p>

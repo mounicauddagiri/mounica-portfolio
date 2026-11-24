@@ -1,4 +1,5 @@
 import { profile, projects } from "../../data/portfolio";
+import { slug } from "../../lib/slug";
 
 const rowClass = "group -mx-4 grid gap-4 px-4 py-8 md:grid-cols-[1fr_1.2fr] md:gap-10";
 
@@ -33,7 +34,7 @@ export const Projects = () => (
       </div>
       <ul className="mt-12 divide-y divide-line border-y border-line">
         {projects.map((project) => (
-          <li key={project.title}>
+          <li key={project.title} id={`project-${slug(project.title)}`}>
             <ProjectRow link={project.link}>
               <h3 className={`flex items-start gap-3 text-2xl font-semibold tracking-tight transition-colors ${project.link ? "group-hover:text-lilac" : ""}`}>
                 {project.title}

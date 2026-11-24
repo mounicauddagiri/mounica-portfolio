@@ -1,4 +1,5 @@
 import { experience } from "../../data/portfolio";
+import { slug } from "../../lib/slug";
 
 export const Experience = () => (
   <section id="experience" className="border-t border-line py-24 md:py-32">
@@ -6,7 +7,11 @@ export const Experience = () => (
       <h2 className="text-4xl font-bold tracking-[-0.03em] md:text-5xl">Experience</h2>
       <ol className="relative border-l border-line">
         {experience.map((job, i) => (
-          <li key={`${job.company}-${job.period}`} className="relative pb-12 pl-8 last:pb-0">
+          <li
+            key={`${job.company}-${job.period}`}
+            id={`job-${slug(`${job.company} ${job.period}`)}`}
+            className="relative -mr-4 rounded-r-lg pb-12 pl-8 pr-4 last:pb-0"
+          >
             <span
               aria-hidden="true"
               className={`absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full ${

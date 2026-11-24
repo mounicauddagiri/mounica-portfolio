@@ -129,3 +129,12 @@ export const aiSkills = [
     highlight: true,
   },
 ];
+
+// Suggested questions shown under the "Ask about my work" panel.
+// The first one plays automatically when the page loads.
+export const askSuggestions = [
+  "Do you have RAG experience?",
+  "Which projects use Java?",
+  "Where have you worked?",
+  "What's your frontend stack?",
+];

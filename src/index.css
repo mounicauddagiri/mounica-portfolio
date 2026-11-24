@@ -59,7 +59,15 @@
 @keyframes caret { 50% { opacity: 0; } }
 .caret { animation: caret 1s step-end infinite; }
 
+/* Highlight for a section a citation in the ask panel points to */
+@keyframes cite-flash {
+  0%, 35% { background-color: rgb(139 92 246 / 0.18); }
+  100% { background-color: transparent; }
+}
+.cite-flash { animation: cite-flash 2s ease-out; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .rise, .caret { animation: none; }
+  .cite-flash { animation: none; background-color: rgb(139 92 246 / 0.12); }
 }

@@ -1,4 +1,5 @@
 import { aiIntro, aiSkills } from "../../data/portfolio";
+import { slug } from "../../lib/slug";
 
 export const AI = () => (
   <section id="ai" className="border-t border-line py-24 md:py-32">
@@ -9,7 +10,7 @@ export const AI = () => (
       </div>
       <ol className="relative mt-16 grid gap-12 md:grid-cols-2 md:gap-x-10 lg:grid-cols-4 lg:before:absolute lg:before:inset-x-0 lg:before:top-5 lg:before:h-px lg:before:bg-gradient-to-r lg:before:from-line lg:before:via-accent/60 lg:before:to-accent lg:before:content-['']">
         {aiSkills.map((skill, i) => (
-          <li key={skill.title} className="relative">
+          <li key={skill.title} id={`ai-${slug(skill.title)}`} className="relative -m-3 rounded-xl p-3">
             <span
               className={`relative z-10 grid h-10 w-10 place-items-center rounded-full border font-mono text-sm ${
                 skill.highlight

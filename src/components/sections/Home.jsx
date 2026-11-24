@@ -1,5 +1,5 @@
 import { profile } from "../../data/portfolio";
-import { AgentTrace } from "../AgentTrace";
+import { AskPanel } from "../AskPanel";
 
 export const Home = () => (
   <section id="home" className="relative overflow-hidden pt-32 pb-24 md:pt-44 md:pb-36">
@@ -33,7 +33,7 @@ export const Home = () => (
         </div>
       </div>
       <div className="rise" style={{ animationDelay: "320ms" }}>
-        <AgentTrace />
+        <AskPanel />
       </div>
     </div>
   </section>
