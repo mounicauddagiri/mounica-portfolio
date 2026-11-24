@@ -5,6 +5,8 @@ const skillGroups = [
   { label: "AI", items: skills.ai },
   { label: "Frontend", items: skills.frontend },
   { label: "Backend", items: skills.backend },
+  { label: "Database", items: skills.database },
+  { label: "Cloud", items: skills.cloud },
 ];
 
 export const About = () => (

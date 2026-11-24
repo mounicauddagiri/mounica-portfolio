@@ -16,7 +16,9 @@ export const profile = {
 
 export const skills = {
   frontend: ["React", "Vue", "TypeScript", "TailwindCSS", "Angular", "MaterialUI", "PrimeNg"],
-  backend: ["Node.js", "Java", "MySQL", "MongoDB", "Python", "AWS"],
+  backend: ["Node.js", "Java", "Python"],
+  database: ["MySQL", "MongoDB", "PostgreSQL", "pgvector"],
+  cloud: ["AWS", "Docker"],
   ai: ["LLM APIs", "Prompt engineering", "RAG", "Vector databases", "AI agents", "MCP"],
 };
 
